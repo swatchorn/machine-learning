@@ -13705,7 +13705,7 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: The grid optimized search technique is a way to find/generate values based a grid of parameters that can’t be easily done. It can be applied to optimize a learning algorithm by identifying the best combination of data on the grid to determine what works best.</strong></p>
+<p><strong>Answer: The grid optimized search technique is a way to find/generate values based a grid of hyperparameters. The hyperparameters are identified in a ‘brute-force’ fashion of using every combination of the data sets to find the best model.  This can be exhaustive if the data sets are large and complicated.  This method can be used to optimize a learning algorithm by identifying the best combination of data on the grid to determine the model that works best.</strong></p>
 
 </div>
 </div>
@@ -13728,8 +13728,9 @@ Think about the pros and cons of adding more training points based on if the tra
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>**Answer: K-fold cross-validation breaks the training data set into equal k subsets for training and testing.  Each subset can be used to test and determinate a model for validation of the remaining k subsets.  Then average the models to create a single estimation.</p>
-<p>The benefit of using K-fold cross-validation with grid search is it cross validation of data sets that may have been discarded as a result of over fitting.  It captures and evaluate the data based on the average of k subset models and hence identify best performing model. **</p>
+<p>**Answer: K-fold cross-validation breaks the training data set into equal k subsets for training and testing.  Each subset can be used to test and determinate a model for validation of the remaining k subsets.  Then average the models to create a single estimation of out of sample performance—cross validated/generalized performance.</p>
+<p>Grid search on its own can have overwhelmingly large hyperparameters especially if the data sets are large as it looks for every combination which can lead to high variance.  Grid search can then use K-fold cross-validation to optimize the data sets by splitting them into small k-subsets.  This minimizes the validation errors as it breaks down the data sets into equal smaller sets/k subsets to determine the average testing accuracy of the subsets thus increasing model accuracy.  This average is then used to optimize the data parameters and identify the best performing model.  K-fold cross validation ends up reducing the variance of the grid search data sets but can increase the time as validation of data sets are done more than once.
+**</p>
 
 </div>
 </div>
@@ -13763,7 +13764,7 @@ Think about the pros and cons of adding more training points based on if the tra
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -13782,7 +13783,7 @@ Think about the pros and cons of adding more training points based on if the tra
     <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create a dictionary for the parameter &#39;max_depth&#39; with a range from 1 to 10</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span><span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span><span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)}</span>
 
     <span class="c1"># TODO: Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
